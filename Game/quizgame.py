@@ -24,22 +24,24 @@ white = (255, 255, 255)
 light_blue = (202, 228, 241)
 dark_blue = (52, 78, 91)
 green = (0, 255, 0)
-
+hover_col = (75, 225, 255)
+click_col = (50, 150, 255)
 clicked = False
 
 
 class Button():
-
-    button_col = (255, 0, 0)
     hover_col = (75, 225, 255)
     click_col = (50, 150, 255)
     text_col = black
-    def __init__(self, x, y, text, width, height):
+    def __init__(self, x, y, text, width, height, button_col, hover_col, click_col):
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.text = text
+        self.button_col = button_col
+        self.hover_col = hover_col
+        self.click_col = click_col
 
     def draw(self, screen: pygame.Surface):
         global clicked
@@ -76,43 +78,43 @@ def draw_text(text, width, height, screen, font, color):
 #ENGLISH
 
 #PAUSE
-pause = Button(480, 10, 'Pause', 140, 80)
+pause = Button(480, 10, 'Pause', 140, 80, red, hover_col, click_col)
 
 #MAIN MENU
-resume = Button(230, 30, "Resume", 180, 80)
-options = Button(230, 150, "Settings", 180, 80)
-information = Button(230, 270, "Information", 180, 80)
-quit = Button(230, 510, "Quit", 180, 80)
+resume = Button(230, 30, "Resume", 180, 80, red, hover_col, click_col)
+options = Button(230, 150, "Settings", 180, 80, red, hover_col, click_col)
+information = Button(230, 270, "Information", 180, 80, red, hover_col, click_col)
+quit = Button(230, 510, "Quit", 180, 80, red, hover_col, click_col)
 
 
 #OPTIONS MENU
-audio_settings = Button(210, 30, "Audio settings", 220, 80)
-video_settings = Button(210, 150, "Video settings", 220, 80)
-key_bindings = Button(220, 270, "Key bindings", 200, 80)
-language_button = Button(220, 390, "Language", 200, 80)
-back = Button(230, 510, "Back", 180, 80)
+audio_settings = Button(210, 30, "Audio settings", 220, 80, red, hover_col, click_col)
+video_settings = Button(210, 150, "Video settings", 220, 80, red, hover_col, click_col)
+key_bindings = Button(220, 270, "Key bindings", 200, 80, red, hover_col, click_col)
+language_button = Button(220, 390, "Language", 200, 80, red, hover_col, click_col)
+back = Button(230, 510, "Back", 180, 80, red, hover_col, click_col)
 
 #LANGUAGE OPTIONS
-english = Button(230, 30, "English", 180, 80)
-russian = Button(230, 150, "Russian", 180, 80)
-german = Button(230, 270, "German", 180, 80)
-bulgarian = Button(230, 390, "Bulgarian", 180, 80)
+english = Button(230, 30, "English", 180, 80, red, hover_col, click_col)
+russian = Button(230, 150, "Russian", 180, 80, red, hover_col, click_col)
+german = Button(230, 270, "German", 180, 80, red, hover_col, click_col)
+bulgarian = Button(230, 390, "Bulgarian", 180, 80, red, hover_col, click_col)
 
 #GAME
 
 #INTRODUCTION
-start_game = Button(100, 450, "Start learning", 400, 80)
+start_game = Button(100, 450, "Start learning", 400, 80, red, hover_col, click_col)
 
 #topic 1
-topic1_button = Button(40, 50, "Topic 1:How to be safe on the internet", 540, 80)
-next_button = Button(440, 510, "Next", 180, 80)
-previous_button = Button(10, 510, "Previous", 220, 80)
-choose_topic_button = Button(20, 510, "Go back to topics", 300, 80)
-back_to_main_button = Button(40, 510, "Go back to main menu", 540, 80)
-start_quiz_topic_1 = Button(400, 510, "Start Quiz", 220, 80)
-next_question_button = Button(400, 510, "Next question", 220, 80)
-go_back_to_main_button = Button(315, 510, "Back to main menu", 300, 80)
-quit_button = Button(10, 510, "Quit", 180, 80)
+topic1_button = Button(40, 50, "Topic 1:How to be safe on the internet", 540, 80, red, hover_col, click_col)
+next_button = Button(440, 510, "Next", 180, 80, red, hover_col, click_col)
+previous_button = Button(10, 510, "Previous", 220, 80, red, hover_col, click_col)
+choose_topic_button = Button(20, 510, "Go back to topics", 300, 80, red, hover_col, click_col)
+back_to_main_button = Button(40, 510, "Go back to main menu", 540, 80, red, hover_col, click_col)
+start_quiz_topic_1 = Button(400, 510, "Start Quiz", 220, 80, red, hover_col, click_col)
+next_question_button = Button(400, 510, "Next question", 220, 80, red, hover_col, click_col)
+go_back_to_main_button = Button(315, 510, "Back to main menu", 300, 80, red, hover_col, click_col)
+quit_button = Button(10, 510, "Quit", 180, 80, red, hover_col, click_col)
 
 
 game_paused = False
