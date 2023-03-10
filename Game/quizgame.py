@@ -26,6 +26,8 @@ dark_blue = (52, 78, 91)
 green = (0, 255, 0)
 hover_col = (75, 225, 255)
 click_col = (50, 150, 255)
+gray = (192,192,192)
+dark_gray = (169,169,169)
 clicked = False
 
 
@@ -115,7 +117,7 @@ start_quiz_topic_1 = Button(400, 510, "Start Quiz", 220, 80, red, hover_col, cli
 next_question_button = Button(400, 510, "Next question", 220, 80, red, hover_col, click_col)
 go_back_to_main_button = Button(315, 510, "Back to main menu", 300, 80, red, hover_col, click_col)
 quit_button = Button(10, 510, "Quit", 180, 80, red, hover_col, click_col)
-
+next_question_button_after_done = Button(400, 510, "Next question", 220, 80, dark_gray, gray, white)
 
 game_paused = False
 
@@ -343,9 +345,13 @@ while run:
         screen.fill((light_blue))
         if pause.draw(screen) == True:
             menu = "paused"
-        if next_question_button.draw(screen) == True and current_question + 1 != len(quiz_data_topic_1) and skips > 0:
-            current_question += 1
-            skips -=1
+        if skips > 0:
+            if next_question_button.draw(screen) == True and current_question + 1 != len(quiz_data_topic_1):
+                current_question += 1
+                skips -=1
+        else:
+            if next_question_button_after_done.draw(screen) == True:
+                pass
         if len(quiz_data_topic_1[current_question]["question"]) < 70:
             question_text = answers_font.render(quiz_data_topic_1[current_question]["question"], True, black)
             screen.blit(question_text, [10, 130])
