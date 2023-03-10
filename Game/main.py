@@ -1,7 +1,9 @@
-import pygame
+import pygame , asyncio
 import random
 from pygame.locals import *
 import time
+import webbrowser
+
 
 pygame.init()
 
@@ -17,6 +19,7 @@ questions_font = pygame.font.SysFont('Comicasns', 23)
 answers_font = pygame.font.SysFont('Comicsans', 23)
 font_topic = pygame.font.SysFont('Arial Black', 20)
 font_instruction = pygame.font.SysFont('Arial Black', 20)
+large_font = pygame.font.SysFont('Arial Black', 50)
 #COLORS
 red = (255, 0, 0)
 green = (0, 255, 0)
@@ -121,6 +124,9 @@ quit_button = Button(10, 510, "Quit", 180, 80, red, hover_col, click_col)
 next_question_button_after_done = Button(400, 510, "Next question", 220, 80, dark_gray, gray, white)
 
 #topic 2
+topic2_button = Button(30, 170, "Topic 2:Types of security", 560, 80, red, hover_col, click_col)
+topic3_button = Button(30, 290, "Topic 3:Types of cyber security", 560, 80, red, hover_col, click_col)
+
 
 game_paused = False
 
@@ -187,6 +193,7 @@ while run:
             pass
         if quit.draw(screen) == True:
             run = False
+            webbrowser.open(r"http://127.0.0.1:5000/")
     if menu == "options":
         if audio_settings.draw(screen) == True:
             pass
@@ -216,13 +223,13 @@ while run:
         if pause.draw(screen) == True:
             menu = "paused"
 
-        draw_text("Welcome to our game!", 150, 100, screen, font, black)
-        draw_text("In this game you will learn how to protect your", 15, 190, screen, font, black)
-        draw_text("data and be safe online.You can choose from 3", 15, 220, screen, font, black)
-        draw_text("topics and start learning things about them ", 15, 250, screen, font, black)
-        draw_text("and than you can take a quiz to test what you", 15, 280, screen, font, black)
-        draw_text("have learned.Enjoy the game!", 15, 310, screen, font, black)
-
+        draw_text("Welcome to our game!", 200, 100, screen, font, black)
+        draw_text("In this game you will learn how to protect your", 90, 190, screen, font, black)
+        draw_text("data and be safe online.You can choose from 3", 90, 220, screen, font, black)
+        draw_text("topics and start learning things about them ", 90, 250, screen, font, black)
+        draw_text("and than you can take a quiz to test what you", 90, 280, screen, font, black)
+        draw_text("have learned.Enjoy the game!", 90, 310, screen, font, black)
+        
         if start_game.draw(screen) == True:
             menu = "Choose topic"
             pygame.time.delay(500)
@@ -230,26 +237,30 @@ while run:
     if menu == "Choose topic":
         if topic1_button.draw(screen) == True:
             menu = "Topic 1_1"
+        if topic2_button.draw(screen) == True:
+            menu = "Topic 1_1"
+        if topic3_button.draw(screen) == True:
+            menu = "Topic 1_1"
         if back_to_main_button.draw(screen) == True:
             menu = "main"
         
     if menu == "Topic 1_1":
         if subject_1_page == 1:
             menu_paused_check = menu
-            draw_text("How to stay safe on the internet", 120, 50, screen, font_topic, black)
-            draw_text("The internet can be a dangerous place for everyone,", 10, 100, screen, font_topic, black) 
-            draw_text("but children and teens are especially vulnerable.", 10, 130, screen, font_topic, black)
-            draw_text("From cyber predators to social media posts that can ", 10, 160, screen, font_topic, black)
-            draw_text("come back to haunt them later in life, online hazards ", 10, 190, screen, font_topic, black)
-            draw_text("can have severe, costly, even tragic, consequences.", 10, 220, screen, font_topic, black)
-            draw_text("Children may unwittingly expose their families to ", 10, 250, screen, font_topic, black)
-            draw_text("internet threats, for example, by accidentally downlo- ", 10, 280, screen, font_topic, black)
-            draw_text("ading malware that could give cyber criminals access ", 10, 310, screen, font_topic, black)
-            draw_text("to their parents' bank account or other sensitive ", 10, 340, screen, font_topic, black)
-            draw_text("information. Although cyber security software can ", 10, 370, screen, font_topic, black)
-            draw_text("help protect against some threats,the most important ", 10, 400, screen, font_topic, black)
-            draw_text("ant safety measure is open communication with your", 10, 430, screen, font_topic, black)
-            draw_text("children.", 10, 460, screen, font_topic, black)
+            draw_text("How to stay safe on the internet", 180, 50, screen, font_topic, black)
+            draw_text("The internet can be a dangerous place for everyone,",110, 100, screen, font_topic, black) 
+            draw_text("but children and teens are especially vulnerable.", 110, 130, screen, font_topic, black)
+            draw_text("From cyber predators to social media posts that can ", 110, 160, screen, font_topic, black)
+            draw_text("come back to haunt them later in life, online hazards ", 110, 190, screen, font_topic, black)
+            draw_text("can have severe, costly, even tragic, consequences.", 110, 220, screen, font_topic, black)
+            draw_text("Children may unwittingly expose their families to ", 110, 250, screen, font_topic, black)
+            draw_text("internet threats, for example, by accidentally downlo- ", 110, 280, screen, font_topic, black)
+            draw_text("ading malware that could give cyber criminals access ", 110, 310, screen, font_topic, black)
+            draw_text("to their parents' bank account or other sensitive ", 110, 340, screen, font_topic, black)
+            draw_text("information. Although cyber security software can ", 110, 370, screen, font_topic, black)
+            draw_text("help protect against some threats,the most important ", 110, 400, screen, font_topic, black)
+            draw_text("ant safety measure is open communication with your", 110, 430, screen, font_topic, black)
+            draw_text("children.", 110, 460, screen, font_topic, black)
             if pause.draw(screen) == True:
                 menu = "paused"
             if next_button.draw(screen) == True:
@@ -258,13 +269,13 @@ while run:
                 menu = "Choose topic"
     if menu == "Topic 1_2":
         menu_paused_check = menu
-        draw_text("1.Get the latest anti-virus and firewall software", 50, 110, screen, font_topic, black)
-        draw_text("Internet security software cannot protect against ", 30, 200, screen, font_topic, black)
-        draw_text("every threat, but it will detect and remove most mal- ", 30, 230, screen, font_topic, black)
-        draw_text("ware—though you should make sure it's to date.", 30, 260, screen, font_topic, black)
-        draw_text("Be sure to stay current with your operating system's ", 30, 290, screen, font_topic, black)
-        draw_text("updates and updates to applications you use.", 30, 320, screen, font_topic, black)
-        draw_text("They provide a vital layer of security.", 30, 350, screen, font_topic, black)
+        draw_text("1.Get the latest anti-virus and firewall software", 180, 110, screen, font_topic, black)
+        draw_text("Internet security software cannot protect against ", 90, 200, screen, font_topic, black)
+        draw_text("every threat, but it will detect and remove most mal- ", 90, 230, screen, font_topic, black)
+        draw_text("ware—though you should make sure it's to date.", 90, 260, screen, font_topic, black)
+        draw_text("Be sure to stay current with your operating system's ", 90, 290, screen, font_topic, black)
+        draw_text("updates and updates to applications you use.", 90, 320, screen, font_topic, black)
+        draw_text("They provide a vital layer of security.", 90, 350, screen, font_topic, black)
         if pause.draw(screen) == True:
             menu = "paused"
         if next_button.draw(screen) == True:
@@ -273,20 +284,20 @@ while run:
             menu = "Topic 1_1"
     if menu == "Topic 1_3":
         menu_paused_check = menu
-        draw_text("2.Create a strong and easy-to-remember password", 40, 90, screen, font_topic, black)
-        draw_text("Passwords are one of the biggest weak spots in the ", 50, 120, screen, font_topic, black)
-        draw_text("whole Internet security structure,but there's currently ", 30, 140, screen, font_topic, black)
-        draw_text("no way around them.", 10, 160, screen, font_topic, black)
-        draw_text("And the problem with passwords is that people tend to ", 30, 190, screen, font_topic, black)
-        draw_text("choose easy ones to remember (such as 'password' ", 30, 220, screen, font_topic, black)
-        draw_text("and '123456'),which are also easy for cyber thieves to ", 30, 250, screen, font_topic, black)
-        draw_text("guess.Select strong passwords that are harder for ", 30, 280, screen, font_topic, black)
-        draw_text("cybercriminals to demystify.Password manager soft- ", 30, 310, screen, font_topic, black)
-        draw_text("ware can help you to manage multiple passwords so", 30, 340, screen, font_topic, black)
-        draw_text("that you don't forget them.A strong password is one ", 30, 370, screen, font_topic, black)
-        draw_text("that is unique and complex—at least 15 characters ", 30, 400, screen, font_topic, black)
-        draw_text("long, mixing letters, numbers and special characters.", 30, 430, screen, font_topic, black)
-        draw_text("that you don't forget them.", 30, 460, screen, font_topic, black)
+        draw_text("2.Create a strong and easy-to-remember password", 180, 90, screen, font_topic, black)
+        draw_text("Passwords are one of the biggest weak spots in the ", 110, 120, screen, font_topic, black)
+        draw_text("whole Internet security structure,but there's currently ", 110, 140, screen, font_topic, black)
+        draw_text("no way around them.", 110, 160, screen, font_topic, black)
+        draw_text("And the problem with passwords is that people tend to ", 110, 190, screen, font_topic, black)
+        draw_text("choose easy ones to remember (such as 'password' ", 110, 220, screen, font_topic, black)
+        draw_text("and '123456'),which are also easy for cyber thieves to ", 110, 250, screen, font_topic, black)
+        draw_text("guess.Select strong passwords that are harder for ", 110, 280, screen, font_topic, black)
+        draw_text("cybercriminals to demystify.Password manager soft- ", 110, 310, screen, font_topic, black)
+        draw_text("ware can help you to manage multiple passwords so", 110, 340, screen, font_topic, black)
+        draw_text("that you don't forget them.A strong password is one ", 110, 370, screen, font_topic, black)
+        draw_text("that is unique and complex—at least 15 characters ", 110, 400, screen, font_topic, black)
+        draw_text("long, mixing letters, numbers and special characters.", 110, 430, screen, font_topic, black)
+        draw_text("that you don't forget them.", 110, 460, screen, font_topic, black)
         if pause.draw(screen) == True:
             menu = "paused"
         if next_button.draw(screen) == True:
@@ -295,14 +306,14 @@ while run:
             menu = "Topic 1_2"
     if menu == "Topic 1_4":
         menu_paused_check = menu
-        draw_text("3. Keep Personal Information Professional and Limited", 20, 100, screen, font_topic, black)
-        draw_text("Potential employers or customers don't need to know ", 10, 160, screen, font_topic, black)
-        draw_text("your personal relationship status or your home address.", 10, 190, screen, font_topic, black)
-        draw_text("They do need to know about your expertise and prof- ", 10, 220, screen, font_topic, black)
-        draw_text("essional background, and how to get in touch with you.", 10, 250, screen, font_topic, black)
-        draw_text("You wouldn't hand purely personal information out to ", 10, 280, screen, font_topic, black)
-        draw_text("strangers individually—don't hand it out to millions of ", 10, 310, screen, font_topic, black)
-        draw_text("people online.", 10, 340, screen, font_topic, black)
+        draw_text("3. Keep Personal Information Professional and Limited", 180, 100, screen, font_topic, black)
+        draw_text("Potential employers or customers don't need to know ", 110, 160, screen, font_topic, black)
+        draw_text("your personal relationship status or your home address.", 110, 190, screen, font_topic, black)
+        draw_text("They do need to know about your expertise and prof- ", 110, 220, screen, font_topic, black)
+        draw_text("essional background, and how to get in touch with you.", 110, 250, screen, font_topic, black)
+        draw_text("You wouldn't hand purely personal information out to ", 110, 280, screen, font_topic, black)
+        draw_text("strangers individually—don't hand it out to millions of ", 110, 310, screen, font_topic, black)
+        draw_text("people online.", 110, 340, screen, font_topic, black)
         if pause.draw(screen) == True:
             menu = "paused"
         if next_button.draw(screen) == True:
@@ -311,29 +322,29 @@ while run:
             menu = "Topic 1_3"
     if menu == "Topic 1_5":
         menu_paused_check = menu
-        draw_text("4. Be Careful What You Download", 20, 100, screen, font_topic, black)
-        draw_text("A top goal of cybercriminals is to trick you into down- ", 10, 160, screen, font_topic, black)
-        draw_text("loading malware—programs or apps that carry malware ", 10, 190, screen, font_topic, black)
-        draw_text("or try to steal information. This malware can be dis- ", 10, 220, screen, font_topic, black)
-        draw_text("guised as an app: anything from a popular game to some- ", 10, 250, screen, font_topic, black)
-        draw_text("thing that checks traffic or the weather. As PCWorld adv- ", 10, 280, screen, font_topic, black)
-        draw_text("ises, don't download apps that look suspicious or come ", 10, 310, screen, font_topic, black)
-        draw_text("from a site you don't trust.", 10, 340, screen, font_topic, black)
+        draw_text("4. Be Careful What You Download", 180, 100, screen, font_topic, black)
+        draw_text("A top goal of cybercriminals is to trick you into down- ", 110, 160, screen, font_topic, black)
+        draw_text("loading malware—programs or apps that carry malware ", 110, 190, screen, font_topic, black)
+        draw_text("or try to steal information. This malware can be dis- ", 110, 220, screen, font_topic, black)
+        draw_text("guised as an app: anything from a popular game to some- ", 110, 250, screen, font_topic, black)
+        draw_text("thing that checks traffic or the weather. As PCWorld adv- ", 110, 280, screen, font_topic, black)
+        draw_text("ises, don't download apps that look suspicious or come ", 110, 310, screen, font_topic, black)
+        draw_text("from a site you don't trust.", 110, 340, screen, font_topic, black)
         if pause.draw(screen) == True:
             menu = "paused"
         if next_button.draw(screen) == True:
             menu = "Topic 1_6"
-        if previous_button.draw(screen) == True:
-            menu = "Topic 1_4"
+        if previous_button.draw(screen) == True:large_font
+            #menu = "Topic 1_4"
     if menu == "Topic 1_6":
         menu_paused_check = menu
-        draw_text("5. Be Careful Who You Meet Online", 20, 100, screen, font_topic, black)
-        draw_text("People you meet online are not always who they claim to ", 10, 160, screen, font_topic, black)
-        draw_text("be. Indeed, they may not even be real. As InfoWorld rep- ", 10, 190, screen, font_topic, black)
-        draw_text("orts, fake social media profiles are a popular way for ", 10, 220, screen, font_topic, black)
-        draw_text("hackers to cozy up to unwary Web users and pick their ", 10, 250, screen, font_topic, black)
-        draw_text("cyber pockets. Be as cautious and sensible in your online ", 10, 280, screen, font_topic, black)
-        draw_text("social life as you are in your in-person social life.", 10, 310, screen, font_topic, black)
+        draw_text("5. Be Careful Who You Meet Online", 180, 100, screen, font_topic, black)
+        draw_text("People you meet online are not always who they claim to ", 110, 160, screen, font_topic, black)
+        draw_text("be. Indeed, they may not even be real. As InfoWorld rep- ", 110, 190, screen, font_topic, black)
+        draw_text("orts, fake social media profiles are a popular way for ", 110, 220, screen, font_topic, black)
+        draw_text("hackers to cozy up to unwary Web users and pick their ", 110, 250, screen, font_topic, black)
+        draw_text("cyber pockets. Be as cautious and sensible in your online ", 110, 280, screen, font_topic, black)
+        draw_text("social life as you are in your in-person social life.", 110, 310, screen, font_topic, black)
         if pause.draw(screen) == True:
             menu = "paused"
         if previous_button.draw(screen) == True:
@@ -383,6 +394,7 @@ while run:
             if event.type == pygame.QUIT:
                 run = True
                 pygame.quit()
+                
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
@@ -417,12 +429,14 @@ while run:
             timer_text = answers_font.render("Paused", True, (0, 0, 0))
             screen.blit(timer_text, timer_rect)            
     if menu == "Quiz 1 end":
-        draw_text(f"Your score is: {score}", 200, 300, screen, answers_font, black)
-        draw_text("End of the game", 200, 200, screen, answers_font, black)
+        draw_text(f"Your score is: {score}", 300, 300, screen, large_font, black)
+        draw_text(f"Your highscore is: {highscore_value}", 300, 345, screen, large_font, black)
+        draw_text("End of the game", 300, 200, screen, large_font, black)
         if go_back_to_main_button.draw(screen) == True:
             menu = "main"
         if quit_button.draw(screen) == True:
-            pygame.quit()
+            webbrowser.open(r"http://127.0.0.1:5000/")
+            run = False
     pygame.display.update()
         
     for event in pygame.event.get():
