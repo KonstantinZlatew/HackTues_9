@@ -19,6 +19,7 @@ font_topic = pygame.font.SysFont('Arial Black', 20)
 font_instruction = pygame.font.SysFont('Arial Black', 20)
 #COLORS
 red = (255, 0, 0)
+green = (0, 255, 0)
 black = (0, 0, 0)
 white = (255, 255, 255)
 light_blue = (202, 228, 241)
@@ -108,7 +109,7 @@ bulgarian = Button(230, 390, "Bulgarian", 180, 80, red, hover_col, click_col)
 start_game = Button(100, 450, "Start learning", 400, 80, red, hover_col, click_col)
 
 #topic 1
-topic1_button = Button(40, 50, "Topic 1:How to be safe on the internet", 540, 80, red, hover_col, click_col)
+topic1_button = Button(30, 50, "Topic 1:How to be safe on the internet", 560, 80, red, hover_col, click_col)
 next_button = Button(440, 510, "Next", 180, 80, red, hover_col, click_col)
 previous_button = Button(10, 510, "Previous", 220, 80, red, hover_col, click_col)
 choose_topic_button = Button(20, 510, "Go back to topics", 300, 80, red, hover_col, click_col)
@@ -118,6 +119,8 @@ next_question_button = Button(400, 510, "Next question", 220, 80, red, hover_col
 go_back_to_main_button = Button(315, 510, "Back to main menu", 300, 80, red, hover_col, click_col)
 quit_button = Button(10, 510, "Quit", 180, 80, red, hover_col, click_col)
 next_question_button_after_done = Button(400, 510, "Next question", 220, 80, dark_gray, gray, white)
+
+#topic 2
 
 game_paused = False
 
@@ -170,13 +173,14 @@ run = True
 current_question = 0
 score = 0
 
-while run:
+start_time = None
 
+while run:
+    
     screen.fill(light_blue)
     if menu == "paused":
         if resume.draw(screen) == True:
             menu = menu_paused_check
-            game_paused = False
         if options.draw(screen) == True:
             menu = "options"
         if information.draw(screen) == True:
@@ -193,8 +197,7 @@ while run:
         if language_button.draw(screen) == True:
             menu = "language"
         if back.draw(screen) == True:
-            menu = "paused"
-                
+            menu = "paused"        
                 
     if menu == "language":
         if english.draw(screen):
@@ -337,14 +340,18 @@ while run:
             menu = "Topic 1_5"
         if start_quiz_topic_1.draw(screen) == True:
             menu = "Quiz 1 start"
+            start_time = time.time()
             current_question = 0
             score = 0
-            skips = 3       
-    if menu == "Quiz 1 start":
+            skips = 3   
+            paused = False
+             
+    if menu == "Quiz 1 start":   
         menu_paused_check = menu
         screen.fill((light_blue))
         if pause.draw(screen) == True:
             menu = "paused"
+            time_started = False
         if skips > 0:
             if next_question_button.draw(screen) == True and current_question + 1 != len(quiz_data_topic_1):
                 current_question += 1
@@ -379,18 +386,36 @@ while run:
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                if  mouse_pos[0] <= 600 and game_paused == False:
-                    if mouse_pos[1] <= 500 and game_paused == False:
+                if mouse_pos[0] <= 400 and game_paused == False:
+                    if mouse_pos[1] >= 200 and mouse_pos[1] <= 500 and game_paused == False:
 
                         answer_index = (mouse_pos[1] - 200) // 50
                             
                         if quiz_data_topic_1[current_question]["answers"][answer_index] == quiz_data_topic_1[current_question]["correct_answer"]:  
+                            current_question += 1
                             score += 1
-                        print(quiz_data_topic_1[current_question]["answers"][answer_index])
-                            
-                        current_question += 1
+                            start_time = time.time()
+                        else:
+                            current_question += 1
+                            start_time = time.time()
                         if current_question == len(quiz_data_topic_1):
                             menu = "Quiz 1 end"
+        if menu != "paused":
+            remaining_time = 31 - (time.time() - start_time)
+            
+            timer_text = answers_font.render(f"Time remaining: {int(remaining_time)}", True, green)
+            timer_rect = timer_text.get_rect(center=(300, 50))
+            screen.blit(timer_text, timer_rect)
+            if remaining_time < 6:
+                timer_text = answers_font.render(f"Time remaining: {int(remaining_time)}", True, red)
+                timer_rect = timer_text.get_rect(center=(300, 50))
+                screen.blit(timer_text, timer_rect)
+            if remaining_time <= 0:
+                current_question += 1
+                start_time = time.time()
+        else:
+            timer_text = answers_font.render("Paused", True, (0, 0, 0))
+            screen.blit(timer_text, timer_rect)            
     if menu == "Quiz 1 end":
         draw_text(f"Your score is: {score}", 200, 300, screen, answers_font, black)
         draw_text("End of the game", 200, 200, screen, answers_font, black)
