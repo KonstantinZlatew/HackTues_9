@@ -24,7 +24,7 @@ def login():
         user = User.query.filter_by(email = email).first()
 
         if user:
-            if check_password_hash( user.password, password ): #and totp.verify(code) == True:
+            if check_password_hash( user.password, password ) and totp.verify(code) == True:
                 return redirect('http://localhost:8000/')
             
 

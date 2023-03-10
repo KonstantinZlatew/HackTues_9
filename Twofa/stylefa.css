@@ -24,13 +24,12 @@ body {
     text-align: center;
 }
 
-button {
-    padding: 10px;
+a {
+    padding: 50px;
     margin-top: -150px;
-    margin-left: 562px;
-    max-width: 200%;
+    margin-left: 552px;
+    max-width: 500%;
     color: white;
-    background-color: rgb(41, 57, 194);
     border: none;
     border-radius: 4px;
     top: 50%;

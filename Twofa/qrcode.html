@@ -11,24 +11,12 @@
 </head>
 <body>
     <form id="form">
-        <h1>Scan me</h1>
+        <h1>Scan to proceed</h1>
         <img src="qrcode.png">   
 
     </form>
 
-    <button
-      onclick = "gotoLink(this)" 
-    >
-    click me
-    </button>
-
-<script>
-
-    function gotoLink(link){
-        location.href = "http://127.0.0.1:5000/login";
-    };
-
-</script>
+    <a href="http://127.0.0.1:5000/login"></a>
     
 </body>
 </html>
