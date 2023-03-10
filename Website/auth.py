@@ -3,7 +3,9 @@ from .models import User
 from werkzeug.security import generate_password_hash , check_password_hash
 from . import db
 from flask_login import login_user , login_required , logout_user , current_user
-
+import time
+import pyotp
+import qrcode
 
 auth = Blueprint('auth' , __name__)
 
@@ -13,19 +15,18 @@ def login():
         
         email = request.form.get('email')
         password = request.form.get('password')
+        code = request.form.get('code')
+
+        key = 'VikiZ'
+
+        totp = pyotp.TOTP(key)
 
         user = User.query.filter_by(email = email).first()
 
         if user:
-            if check_password_hash( user.password, password ):
-                global headings , data
-                headings = ['Name' , 'email']
-                
-                with open ('data.txt' , 'a') as file :
-                    file.write(user.email)
-                    file.write('\n')
-
+            if check_password_hash( user.password, password ) and totp.verify(code) == True:
                 return redirect('http://localhost:8000/')
+            
 
     return render_template("login.html")
 
@@ -52,16 +53,9 @@ def sign_up():
     return render_template("signup.html")
 
 
-
-@auth.route('/game')
-
-def game():
-    return render_template("game.html")
-
-
 #leaderboard
 
-data  = [
+'''data  = [
     ['Peter' , 'Software engineer' , '5000'],
     ['Amy' , 'Web Developer' , '3000'],
     ['Bob' , 'Scrum Master' , '10000'],
@@ -80,3 +74,6 @@ def leaderboard():
         #print(user.email)
 
     return render_template('leaderboard.html' , headings = headings , data = data)
+'''
+
+
