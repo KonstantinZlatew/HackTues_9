@@ -430,7 +430,6 @@ while run:
             screen.blit(timer_text, timer_rect)            
     if menu == "Quiz 1 end":
         draw_text(f"Your score is: {score}", 300, 300, screen, large_font, black)
-        draw_text(f"Your highscore is: {highscore_value}", 300, 345, screen, large_font, black)
         draw_text("End of the game", 300, 200, screen, large_font, black)
         if go_back_to_main_button.draw(screen) == True:
             menu = "main"
