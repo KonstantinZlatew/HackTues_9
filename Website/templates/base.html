@@ -32,10 +32,6 @@
         padding: 22px 20px;
         height: 80px;
         float: left;
-        font-size: 24px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color:rgb(218, 145, 20);
     }
 
     nav ul {
@@ -69,6 +65,21 @@
         background-position: center;
     }
 
+    .text-header{
+      position: absolute;
+      top: 45%;
+      left:42%;
+      font-size: x-large;
+
+    }
+
+    .text{
+      position: absolute;
+      margin: 30%;
+      padding: 0%;
+      top: 0%;
+    }
+
     </style>
 
 
@@ -77,13 +88,16 @@
   <body>
 
     <nav>
-            <div class = 'logo'>Game</div>
+            <div class = 'logo'><img src="lock.png" alt=""></div>
               <ul> 
                 <li> <a class="nav-item nav-link" id="login" href="http://127.0.0.1:5501/Twofa/qrcode.html">Login</a> </li>
                 <li> <a class="nav-item nav-link" id="signUp" href="/sign_up">Sign Up</a> </li>
               </ul>
       </nav>
-
+      <div class="text-header"><center><p>CypherEye</p></center></div>
+      <div class="text"><p>Cyphereye is a web application for learning about security. You can create a profile by signing in or if you already have a profile you can click on the log in button. 
+        When you click on the button a QR code will apear. You should scan it to log in. Then  you can read some information about security and continue with our quiz game and test yourself. 
+        There are three subtopics:  1)How to be safe on the internet; 2)Types of security and 3)Types of cyber security. It s really fun and you can learn and play at the same time.</p></div>
         <section></section>
   </body>
 </html>
